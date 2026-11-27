@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="controllers.AllResultsController"
+    style="-fx-background-color: #f9fafb;">
+
+  <center>
+    <VBox spacing="14" style="-fx-padding: 24;">
+      <HBox alignment="CENTER_LEFT" spacing="16">
+        <Label text="All Student Results"
+            style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #3c3489;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="totalAttemptsLabel" text="Total Attempts: 0"
+            style="-fx-text-fill: #555; -fx-font-size: 13;"/>
+        <Button text="Refresh" onAction="#refreshTable"
+            style="-fx-background-color: #534AB7; -fx-text-fill: white; -fx-background-radius: 6; -fx-padding: 7 16; -fx-cursor: hand;"/>
+      </HBox>
+      <Separator/>
+
+      <TableView fx:id="resultsTable" VBox.vgrow="ALWAYS">
+        <columns>
+          <TableColumn fx:id="studentCol" text="Student Name" prefWidth="180"/>
+          <TableColumn fx:id="rollCol"    text="Roll No"      prefWidth="110"/>
+          <TableColumn fx:id="quizCol"    text="Quiz"         prefWidth="160"/>
+          <TableColumn fx:id="scoreCol"   text="Score"        prefWidth="90"/>
+          <TableColumn fx:id="percentCol" text="Percentage"   prefWidth="110"/>
+          <TableColumn fx:id="gradeCol"   text="Grade"        prefWidth="80"/>
+        </columns>
+        <placeholder>
+          <Label text="No results yet. Students need to attempt quizzes first."
+              style="-fx-text-fill: #999; -fx-font-size: 13;"/>
+        </placeholder>
+      </TableView>
+    </VBox>
+  </center>
+</BorderPane>

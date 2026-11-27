@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controllers.AdminHomeScreenController"
+            stylesheets="@../styles/quizhub.css"
+            style="-fx-background-color: #F8FAFC;">
+
+  <!-- TOP HEADER -->
+  <top>
+    <HBox styleClass="brand-header" alignment="CENTER_LEFT" spacing="20">
+      <VBox>
+        <Label text="⚡ QuizHub" styleClass="brand-title"/>
+        <Label text="Administrator Control Panel" styleClass="brand-subtitle"/>
+      </VBox>
+      <Region HBox.hgrow="ALWAYS"/>
+      <Button text="Sign Out ➔" onAction="#logout" styleClass="btn-outline" style="-fx-text-fill: white; -fx-border-color: #A5B4FC;"/>
+    </HBox>
+  </top>
+
+  <!-- CENTER TAB PANE -->
+  <center>
+    <TabPane fx:id="adminTabPane" tabClosingPolicy="UNAVAILABLE"
+             style="-fx-tab-min-width: 160; -fx-font-size: 13px;">
+      
+      <!-- TAB 1: MANAGE QUIZZES -->
+      <Tab text="📋 Manage Quizzes">
+        <HBox spacing="24" style="-fx-padding: 24;">
+          
+          <!-- Add Quiz Form Card -->
+          <VBox prefWidth="380" spacing="14" styleClass="quizhub-card">
+            <Label text="Add New Quiz" styleClass="quizhub-card-header"/>
+            <Separator/>
+            
+            <VBox spacing="4">
+              <Label text="Quiz Title" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #475569;"/>
+              <TextField fx:id="quizTitleInput" promptText="e.g. Python Programming" style="-fx-padding: 8; -fx-background-radius: 6; -fx-border-color: #CBD5E1;"/>
+            </VBox>
+
+            <VBox spacing="4">
+              <Label text="Subject / Category" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #475569;"/>
+              <TextField fx:id="quizSubjectInput" promptText="e.g. Computer Science" style="-fx-padding: 8; -fx-background-radius: 6; -fx-border-color: #CBD5E1;"/>
+            </VBox>
+
+            <VBox spacing="4">
+              <Label text="Time Limit (Minutes)" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #475569;"/>
+              <TextField fx:id="quizTimeLimitInput" promptText="10" style="-fx-padding: 8; -fx-background-radius: 6; -fx-border-color: #CBD5E1;"/>
+            </VBox>
+
+            <VBox spacing="4">
+              <Label text="Difficulty Level" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #475569;"/>
+              <ComboBox fx:id="quizDifficultyInput" maxWidth="Infinity" style="-fx-background-radius: 6; -fx-border-color: #CBD5E1;"/>
+            </VBox>
+
+            <Label fx:id="quizStatusLabel" text="" style="-fx-text-fill: #10B981; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+            <Button text="Create Quiz +" onAction="#createQuiz" styleClass="btn-primary" maxWidth="Infinity"/>
+          </VBox>
+
+          <!-- Quiz Table Card -->
+          <VBox HBox.hgrow="ALWAYS" spacing="14" styleClass="quizhub-card">
+            <HBox alignment="CENTER_LEFT">
+              <Label text="Existing Quizzes Catalog" styleClass="quizhub-card-header"/>
+              <Region HBox.hgrow="ALWAYS"/>
+              <Button text="Delete Selected Quiz" onAction="#deleteSelectedQuiz" styleClass="btn-outline" style="-fx-text-fill: #EF4444; -fx-border-color: #FCA5A5;"/>
+            </HBox>
+            <Separator/>
+            <TableView fx:id="quizTable" VBox.vgrow="ALWAYS" styleClass="table-view">
+              <columns>
+                <TableColumn fx:id="qTitleCol" prefWidth="180" text="Title"/>
+                <TableColumn fx:id="qSubjectCol" prefWidth="140" text="Subject"/>
+                <TableColumn fx:id="qTimeCol" prefWidth="100" text="Time (Mins)"/>
+                <TableColumn fx:id="qDiffCol" prefWidth="100" text="Difficulty"/>
+              </columns>
+              <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+              </columnResizePolicy>
+            </TableView>
+          </VBox>
+
+        </HBox>
+      </Tab>
+
+      <!-- TAB 2: MANAGE QUESTIONS -->
+      <Tab text="❓ Manage Questions">
+        <HBox spacing="24" style="-fx-padding: 24;">
+          
+          <!-- Add Question Form -->
+          <VBox prefWidth="420" spacing="12" styleClass="quizhub-card">
+            <Label text="Add Question to Quiz" styleClass="quizhub-card-header"/>
+            <Separator/>
+
+            <VBox spacing="4">
+              <Label text="Select Quiz" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #475569;"/>
+              <ComboBox fx:id="questionQuizSelect" maxWidth="Infinity"/>
+            </VBox>
+
+            <VBox spacing="4">
+              <Label text="Question Text" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #475569;"/>
+              <TextArea fx:id="questionTextInput" prefRowCount="2" promptText="Type question statement here..." style="-fx-background-radius: 6; -fx-border-color: #CBD5E1;"/>
+            </VBox>
+
+            <HBox spacing="10">
+              <VBox HBox.hgrow="ALWAYS" spacing="4">
+                <Label text="Option A" style="-fx-font-size: 11px; -fx-font-weight: bold;"/>
+                <TextField fx:id="optAInput" promptText="Option A"/>
+              </VBox>
+              <VBox HBox.hgrow="ALWAYS" spacing="4">
+                <Label text="Option B" style="-fx-font-size: 11px; -fx-font-weight: bold;"/>
+                <TextField fx:id="optBInput" promptText="Option B"/>
+              </VBox>
+            </HBox>
+
+            <HBox spacing="10">
+              <VBox HBox.hgrow="ALWAYS" spacing="4">
+                <Label text="Option C" style="-fx-font-size: 11px; -fx-font-weight: bold;"/>
+                <TextField fx:id="optCInput" promptText="Option C"/>
+              </VBox>
+              <VBox HBox.hgrow="ALWAYS" spacing="4">
+                <Label text="Option D" style="-fx-font-size: 11px; -fx-font-weight: bold;"/>
+                <TextField fx:id="optDInput" promptText="Option D"/>
+              </VBox>
+            </HBox>
+
+            <VBox spacing="4">
+              <Label text="Correct Choice" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #475569;"/>
+              <ComboBox fx:id="correctOptChoice" maxWidth="Infinity"/>
+            </VBox>
+
+            <Label fx:id="questionStatusLabel" text="" style="-fx-text-fill: #10B981; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+            <Button text="Add Question to Quiz +" onAction="#createQuestion" styleClass="btn-success" maxWidth="Infinity"/>
+          </VBox>
+
+          <!-- Questions Table -->
+          <VBox HBox.hgrow="ALWAYS" spacing="14" styleClass="quizhub-card">
+            <HBox alignment="CENTER_LEFT" spacing="10">
+              <Label text="Question Bank" styleClass="quizhub-card-header"/>
+              <Region HBox.hgrow="ALWAYS"/>
+              <Button text="Delete Selected Question" onAction="#deleteSelectedQuestion" styleClass="btn-outline" style="-fx-text-fill: #EF4444; -fx-border-color: #FCA5A5;"/>
+            </HBox>
+            <Separator/>
+            <TableView fx:id="questionsTable" VBox.vgrow="ALWAYS" styleClass="table-view">
+              <columns>
+                <TableColumn fx:id="qBankQuizCol" prefWidth="140" text="Quiz Title"/>
+                <TableColumn fx:id="qBankTextCol" prefWidth="240" text="Question Text"/>
+                <TableColumn fx:id="qBankCorrectCol" prefWidth="120" text="Correct Option"/>
+              </columns>
+              <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+              </columnResizePolicy>
+            </TableView>
+          </VBox>
+
+        </HBox>
+      </Tab>
+
+      <!-- TAB 3: MANAGE STUDENTS -->
+      <Tab text="👥 Manage Students">
+        <VBox spacing="16" style="-fx-padding: 24;">
+          <VBox styleClass="quizhub-card" VBox.vgrow="ALWAYS" spacing="14">
+            <HBox alignment="CENTER_LEFT">
+              <VBox>
+                <Label text="Registered Students Directory" styleClass="quizhub-card-header"/>
+                <Label text="View and manage student user accounts registered on the platform" style="-fx-font-size: 12px; -fx-text-fill: #64748B;"/>
+              </VBox>
+              <Region HBox.hgrow="ALWAYS"/>
+              <Button text="Remove Student Account" onAction="#deleteSelectedStudent" styleClass="btn-outline" style="-fx-text-fill: #EF4444; -fx-border-color: #FCA5A5;"/>
+            </HBox>
+
+            <Separator/>
+
+            <TableView fx:id="studentsTable" VBox.vgrow="ALWAYS" styleClass="table-view">
+              <columns>
+                <TableColumn fx:id="stuNameCol" prefWidth="200" text="Student Name"/>
+                <TableColumn fx:id="stuEmailCol" prefWidth="220" text="Email Address"/>
+                <TableColumn fx:id="stuRollCol" prefWidth="160" text="Roll Number"/>
+              </columns>
+              <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+              </columnResizePolicy>
+            </TableView>
+          </VBox>
+        </VBox>
+      </Tab>
+
+      <!-- TAB 4: ALL RESULTS & ANALYTICS -->
+      <Tab text="📊 All Results &amp; Analytics">
+        <VBox spacing="20" style="-fx-padding: 24;">
+          
+          <HBox spacing="24">
+            <VBox styleClass="stat-widget" spacing="4">
+              <Label text="🎓" style="-fx-font-size: 24px;"/>
+              <Label fx:id="statTotalStudents" text="0" styleClass="stat-number"/>
+              <Label text="REGISTERED STUDENTS" styleClass="stat-label"/>
+            </VBox>
+            <VBox styleClass="stat-widget" spacing="4">
+              <Label text="📋" style="-fx-font-size: 24px;"/>
+              <Label fx:id="statTotalQuizzes" text="0" styleClass="stat-number" style="-fx-text-fill: #10B981;"/>
+              <Label text="ACTIVE QUIZZES" styleClass="stat-label"/>
+            </VBox>
+            <VBox styleClass="stat-widget" spacing="4">
+              <Label text="📝" style="-fx-font-size: 24px;"/>
+              <Label fx:id="statTotalAttempts" text="0" styleClass="stat-number" style="-fx-text-fill: #F59E0B;"/>
+              <Label text="TOTAL TESTS ATTEMPTED" styleClass="stat-label"/>
+            </VBox>
+          </HBox>
+
+          <VBox styleClass="quizhub-card" VBox.vgrow="ALWAYS" spacing="14">
+            <Label text="Student Exam Results History" styleClass="quizhub-card-header"/>
+            <Separator/>
+            <TableView fx:id="allResultsTable" VBox.vgrow="ALWAYS" styleClass="table-view">
+              <columns>
+                <TableColumn fx:id="resStuNameCol" prefWidth="180" text="Student Name"/>
+                <TableColumn fx:id="resRollCol" prefWidth="130" text="Roll Number"/>
+                <TableColumn fx:id="resQuizCol" prefWidth="200" text="Quiz Title"/>
+                <TableColumn fx:id="resScoreCol" prefWidth="110" text="Score"/>
+                <TableColumn fx:id="resPctCol" prefWidth="120" text="Percentage"/>
+                <TableColumn fx:id="resGradeCol" prefWidth="90" text="Grade"/>
+              </columns>
+              <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+              </columnResizePolicy>
+            </TableView>
+          </VBox>
+
+        </VBox>
+      </Tab>
+
+    </TabPane>
+  </center>
+</BorderPane>

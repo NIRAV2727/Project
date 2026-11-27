@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="controllers.AddQuizFXMLController"
+    style="-fx-background-color: #f9fafb;">
+
+  <center>
+    <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;">
+      <VBox spacing="20" style="-fx-padding: 24;">
+
+        <!-- ROW 1: Add Quiz + Quiz List -->
+        <HBox spacing="20">
+
+          <!-- ADD QUIZ FORM -->
+          <VBox spacing="12" prefWidth="300"
+              style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20; -fx-effect: dropshadow(gaussian,#ddd,6,0,0,2);">
+            <Label text="Add New Quiz" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #3c3489;"/>
+            <Separator/>
+            <Label text="Quiz Title" style="-fx-font-size: 12; -fx-text-fill: #555;"/>
+            <TextField fx:id="titleField" promptText="e.g. Science Quiz"
+                style="-fx-background-radius: 6; -fx-border-color: #ddd; -fx-border-radius: 6; -fx-padding: 8;"/>
+            <Label text="Subject" style="-fx-font-size: 12; -fx-text-fill: #555;"/>
+            <TextField fx:id="subjectField" promptText="e.g. Physics"
+                style="-fx-background-radius: 6; -fx-border-color: #ddd; -fx-border-radius: 6; -fx-padding: 8;"/>
+            <Label text="Time Limit (minutes)" style="-fx-font-size: 12; -fx-text-fill: #555;"/>
+            <TextField fx:id="timeLimitField" promptText="e.g. 15"
+                style="-fx-background-radius: 6; -fx-border-color: #ddd; -fx-border-radius: 6; -fx-padding: 8;"/>
+            <Label text="Difficulty" style="-fx-font-size: 12; -fx-text-fill: #555;"/>
+            <ComboBox fx:id="difficultyBox" maxWidth="Infinity"/>
+            <Label fx:id="errorLabel"   style="-fx-text-fill: red;   -fx-font-size: 12;" text=""/>
+            <Label fx:id="successLabel" style="-fx-text-fill: green; -fx-font-size: 12;" text=""/>
+            <Button text="+ Add Quiz" maxWidth="Infinity" onAction="#addQuiz"
+                style="-fx-background-color: #534AB7; -fx-text-fill: white; -fx-background-radius: 6; -fx-font-size: 13; -fx-padding: 9; -fx-cursor: hand;"/>
+          </VBox>
+
+          <!-- QUIZ LIST -->
+          <VBox spacing="10" HBox.hgrow="ALWAYS"
+              style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20; -fx-effect: dropshadow(gaussian,#ddd,6,0,0,2);">
+            <Label text="Existing Quizzes" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #3c3489;"/>
+            <Separator/>
+            <ListView fx:id="quizListView" VBox.vgrow="ALWAYS" prefHeight="180"
+                style="-fx-border-color: #eee; -fx-border-radius: 6;"/>
+            <Button text="Delete Selected Quiz" onAction="#deleteQuiz"
+                style="-fx-background-color: #E24B4A; -fx-text-fill: white; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;"/>
+          </VBox>
+        </HBox>
+
+        <!-- ROW 2: Add Question + Question List -->
+        <HBox spacing="20">
+
+          <!-- ADD QUESTION FORM -->
+          <VBox spacing="10" prefWidth="340"
+              style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20; -fx-effect: dropshadow(gaussian,#ddd,6,0,0,2);">
+            <Label text="Add Question to Quiz" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #1e7e5e;"/>
+            <Separator/>
+            <Label text="Select Quiz" style="-fx-font-size: 12; -fx-text-fill: #555;"/>
+            <ComboBox fx:id="quizSelectBox" maxWidth="Infinity" onAction="#onQuizSelectChanged"/>
+            <Label text="Question" style="-fx-font-size: 12; -fx-text-fill: #555;"/>
+            <TextField fx:id="questionField" promptText="Enter question text"
+                style="-fx-background-radius: 6; -fx-border-color: #ddd; -fx-border-radius: 6; -fx-padding: 8;"/>
+            <HBox spacing="8">
+              <VBox spacing="4" HBox.hgrow="ALWAYS">
+                <Label text="Option A" style="-fx-font-size: 12; -fx-text-fill: #555;"/>
+                <TextField fx:id="optAField" promptText="Option A"
+                    style="-fx-background-radius: 6; -fx-border-color: #ddd; -fx-border-radius: 6; -fx-padding: 7;"/>
+              </VBox>
+              <VBox spacing="4" HBox.hgrow="ALWAYS">
+                <Label text="Option B" style="-fx-font-size: 12; -fx-text-fill: #555;"/>
+                <TextField fx:id="optBField" promptText="Option B"
+                    style="-fx-background-radius: 6; -fx-border-color: #ddd; -fx-border-radius: 6; -fx-padding: 7;"/>
+              </VBox>
+            </HBox>
+            <HBox spacing="8">
+              <VBox spacing="4" HBox.hgrow="ALWAYS">
+                <Label text="Option C" style="-fx-font-size: 12; -fx-text-fill: #555;"/>
+                <TextField fx:id="optCField" promptText="Option C"
+                    style="-fx-background-radius: 6; -fx-border-color: #ddd; -fx-border-radius: 6; -fx-padding: 7;"/>
+              </VBox>
+              <VBox spacing="4" HBox.hgrow="ALWAYS">
+                <Label text="Option D" style="-fx-font-size: 12; -fx-text-fill: #555;"/>
+                <TextField fx:id="optDField" promptText="Option D"
+                    style="-fx-background-radius: 6; -fx-border-color: #ddd; -fx-border-radius: 6; -fx-padding: 7;"/>
+              </VBox>
+            </HBox>
+            <Label text="Correct Answer" style="-fx-font-size: 12; -fx-text-fill: #555;"/>
+            <ComboBox fx:id="correctAnswerBox" maxWidth="Infinity"/>
+            <Label fx:id="qErrorLabel"   style="-fx-text-fill: red;   -fx-font-size: 12;" text=""/>
+            <Label fx:id="qSuccessLabel" style="-fx-text-fill: green; -fx-font-size: 12;" text=""/>
+            <Button text="+ Add Question" maxWidth="Infinity" onAction="#addQuestion"
+                style="-fx-background-color: #1D9E75; -fx-text-fill: white; -fx-background-radius: 6; -fx-font-size: 13; -fx-padding: 9; -fx-cursor: hand;"/>
+          </VBox>
+
+          <!-- QUESTION LIST -->
+          <VBox spacing="10" HBox.hgrow="ALWAYS"
+              style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20; -fx-effect: dropshadow(gaussian,#ddd,6,0,0,2);">
+            <Label text="Questions in Selected Quiz" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #1e7e5e;"/>
+            <Separator/>
+            <ListView fx:id="questionListView" VBox.vgrow="ALWAYS" prefHeight="240"
+                style="-fx-border-color: #eee; -fx-border-radius: 6;"/>
+            <Button text="Delete Selected Question" onAction="#deleteQuestion"
+                style="-fx-background-color: #E24B4A; -fx-text-fill: white; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;"/>
+          </VBox>
+        </HBox>
+
+      </VBox>
+    </ScrollPane>
+  </center>
+</BorderPane>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="controllers.AnalyticsController"
+    style="-fx-background-color: #f9fafb;">
+
+  <center>
+    <VBox spacing="24" style="-fx-padding: 30;">
+      <Label text="Analytics &amp; Reports"
+          style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #3c3489;"/>
+      <Separator/>
+
+      <!-- STAT CARDS ROW 1 -->
+      <HBox spacing="20">
+        <VBox style="-fx-background-color: #EEEDFE; -fx-background-radius: 10; -fx-padding: 24;" alignment="CENTER" prefWidth="180" spacing="8">
+          <Label text="👥" style="-fx-font-size: 30;"/>
+          <Label fx:id="totalStudentsLabel" text="0"
+              style="-fx-font-size: 32; -fx-font-weight: bold; -fx-text-fill: #3c3489;"/>
+          <Label text="Total Students" style="-fx-text-fill: #534AB7; -fx-font-size: 13;"/>
+        </VBox>
+        <VBox style="-fx-background-color: #E1F5EE; -fx-background-radius: 10; -fx-padding: 24;" alignment="CENTER" prefWidth="180" spacing="8">
+          <Label text="📋" style="-fx-font-size: 30;"/>
+          <Label fx:id="totalQuizzesLabel" text="0"
+              style="-fx-font-size: 32; -fx-font-weight: bold; -fx-text-fill: #085041;"/>
+          <Label text="Total Quizzes" style="-fx-text-fill: #1D9E75; -fx-font-size: 13;"/>
+        </VBox>
+        <VBox style="-fx-background-color: #FAEEDA; -fx-background-radius: 10; -fx-padding: 24;" alignment="CENTER" prefWidth="180" spacing="8">
+          <Label text="❓" style="-fx-font-size: 30;"/>
+          <Label fx:id="totalQuestionsLabel" text="0"
+              style="-fx-font-size: 32; -fx-font-weight: bold; -fx-text-fill: #633806;"/>
+          <Label text="Questions" style="-fx-text-fill: #854F0B; -fx-font-size: 13;"/>
+        </VBox>
+      </HBox>
+
+      <!-- STAT CARDS ROW 2 -->
+      <HBox spacing="20">
+        <VBox style="-fx-background-color: #EAF3DE; -fx-background-radius: 10; -fx-padding: 24;" alignment="CENTER" prefWidth="180" spacing="8">
+          <Label text="✅" style="-fx-font-size: 30;"/>
+          <Label fx:id="passRateLabel" text="0%"
+              style="-fx-font-size: 32; -fx-font-weight: bold; -fx-text-fill: #27500A;"/>
+          <Label text="Pass Rate" style="-fx-text-fill: #3B6D11; -fx-font-size: 13;"/>
+        </VBox>
+        <VBox style="-fx-background-color: #E6F1FB; -fx-background-radius: 10; -fx-padding: 24;" alignment="CENTER" prefWidth="180" spacing="8">
+          <Label text="📊" style="-fx-font-size: 30;"/>
+          <Label fx:id="avgScoreLabel" text="0"
+              style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: #0C447C;"/>
+          <Label text="Avg. Score" style="-fx-text-fill: #185FA5; -fx-font-size: 13;"/>
+        </VBox>
+      </HBox>
+    </VBox>
+  </center>
+</BorderPane>

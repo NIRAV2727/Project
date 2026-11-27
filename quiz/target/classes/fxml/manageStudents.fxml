@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="controllers.ManageStudentsController"
+    style="-fx-background-color: #f9fafb;">
+
+  <center>
+    <VBox spacing="16" style="-fx-padding: 24;">
+      <HBox alignment="CENTER_LEFT" spacing="16">
+        <Label text="Manage Students" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #3c3489;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="totalStudentsLabel" text="Total Students: 0"
+            style="-fx-text-fill: #777; -fx-font-size: 13;"/>
+      </HBox>
+      <Separator/>
+
+      <HBox spacing="12" alignment="CENTER_LEFT">
+        <TextField fx:id="searchField" promptText="Search by name, email or roll no..."
+            prefWidth="300"
+            style="-fx-background-radius: 6; -fx-border-color: #ddd; -fx-border-radius: 6; -fx-padding: 8;"/>
+        <Button text="🔍 Search" onAction="#searchStudent"
+            style="-fx-background-color: #534AB7; -fx-text-fill: white; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;"/>
+        <Button text="↺ Refresh" onAction="#refreshList"
+            style="-fx-background-color: #1D9E75; -fx-text-fill: white; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;"/>
+      </HBox>
+
+      <TableView fx:id="studentsTable" VBox.vgrow="ALWAYS">
+        <columns>
+          <TableColumn fx:id="nameCol" text="Full Name" prefWidth="220"/>
+          <TableColumn fx:id="emailCol" text="Email" prefWidth="240"/>
+          <TableColumn fx:id="rollCol" text="Roll No" prefWidth="150"/>
+        </columns>
+      </TableView>
+
+      <HBox spacing="12">
+        <Button text="🗑  Delete Student" onAction="#deleteStudent"
+            style="-fx-background-color: #E24B4A; -fx-text-fill: white; -fx-background-radius: 6; -fx-padding: 9 20; -fx-cursor: hand;"/>
+      </HBox>
+    </VBox>
+  </center>
+</BorderPane>

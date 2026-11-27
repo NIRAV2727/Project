@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" 
+            xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="controllers.LeaderboardController" 
+            stylesheets="@../styles/quizhub.css"
+            style="-fx-background-color: #F8FAFC;">
+            
+   <!-- TOP HEADER BANNER -->
+   <top>
+      <HBox styleClass="brand-header" alignment="CENTER_LEFT" spacing="20">
+         <VBox>
+            <Label text="⚡ QuizHub" styleClass="brand-title"/>
+            <Label text="Global Student Rankings &amp; Scoreboard" styleClass="brand-subtitle"/>
+         </VBox>
+         <Region HBox.hgrow="ALWAYS"/>
+         <Button text="← Back to Dashboard" onAction="#backToDashboard" styleClass="btn-outline" style="-fx-text-fill: white; -fx-border-color: #A5B4FC;"/>
+      </HBox>
+   </top>
+
+   <!-- CENTER TABLE CARD -->
+   <center>
+      <VBox spacing="20" style="-fx-padding: 30 40 40 40;">
+         <VBox styleClass="quizhub-card" spacing="16" VBox.vgrow="ALWAYS">
+            
+            <HBox alignment="CENTER_LEFT">
+               <VBox>
+                  <Label text="🏆 Global Leaderboard" styleClass="quizhub-card-header"/>
+                  <Label text="Real-time rankings based on student quiz attempts and percentages" style="-fx-font-size: 12px; -fx-text-fill: #64748B;"/>
+               </VBox>
+               <Region HBox.hgrow="ALWAYS"/>
+            </HBox>
+
+            <Separator/>
+
+            <TableView fx:id="leaderboardTable" VBox.vgrow="ALWAYS" styleClass="table-view">
+               <columns>
+                  <TableColumn fx:id="nameCol" prefWidth="180" text="Student Name" />
+                  <TableColumn fx:id="rollNoCol" prefWidth="130" text="Roll Number" />
+                  <TableColumn fx:id="quizCol" prefWidth="240" text="Quiz Title" />
+                  <TableColumn fx:id="scoreCol" prefWidth="120" text="Score" />
+                  <TableColumn fx:id="pctCol" prefWidth="130" text="Percentage" />
+                  <TableColumn fx:id="gradeCol" prefWidth="100" text="Grade" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+
+         </VBox>
+      </VBox>
+   </center>
+</BorderPane>

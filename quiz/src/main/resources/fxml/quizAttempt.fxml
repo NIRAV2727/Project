@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" 
+            xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="controllers.QuizAttemptController" 
+            stylesheets="@../styles/quizhub.css"
+            style="-fx-background-color: #F8FAFC;">
+            
+   <!-- TOP HEADER WITH LIVE TIMER -->
+   <top>
+      <HBox styleClass="brand-header" alignment="CENTER_LEFT" spacing="20">
+         <VBox>
+            <Label fx:id="quizTitleLabel" text="Quiz Title" styleClass="brand-title" style="-fx-font-size: 22px;"/>
+            <Label fx:id="subjectLabel" text="Subject: Computer Science" styleClass="brand-subtitle"/>
+         </VBox>
+         
+         <Region HBox.hgrow="ALWAYS"/>
+
+         <!-- Live Countdown Timer Widget -->
+         <HBox alignment="CENTER" spacing="10" style="-fx-background-color: rgba(255, 255, 255, 0.15); -fx-padding: 8 18; -fx-background-radius: 20;">
+            <Label text="⏱" style="-fx-font-size: 18px;"/>
+            <VBox alignment="CENTER_LEFT">
+               <Label text="TIME REMAINING" style="-fx-text-fill: #CBD5E1; -fx-font-size: 10px; -fx-font-weight: bold;"/>
+               <Label fx:id="timerLabel" text="10:00" style="-fx-text-fill: #FDE047; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+            </VBox>
+         </HBox>
+      </HBox>
+   </top>
+
+   <!-- CENTER QUESTION RUNNER CARD -->
+   <center>
+      <VBox spacing="20" style="-fx-padding: 30 40 40 40;" alignment="TOP_CENTER">
+         
+         <VBox spacing="20" styleClass="quizhub-card" style="-fx-max-width: 760px;" VBox.vgrow="ALWAYS">
+            
+            <!-- Progress Bar & Question Counter -->
+            <VBox spacing="8">
+               <HBox alignment="CENTER_LEFT">
+                  <Label fx:id="questionNumberLabel" text="Question 1 of 5" style="-fx-text-fill: #4F46E5; -fx-font-size: 15px; -fx-font-weight: bold;"/>
+                  <Region HBox.hgrow="ALWAYS"/>
+                  <Label fx:id="progressPctLabel" text="20% Completed" style="-fx-text-fill: #64748B; -fx-font-size: 13px; -fx-font-weight: 600;"/>
+               </HBox>
+               <ProgressBar fx:id="quizProgressBar" progress="0.2" maxWidth="Infinity" prefHeight="10" style="-fx-accent: #4F46E5;"/>
+            </VBox>
+
+            <Separator/>
+
+            <!-- Question Statement -->
+            <Label fx:id="questionTextLabel" text="Question text will be displayed here?" 
+                   style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #0F172A; -fx-line-spacing: 4;" wrapText="true"/>
+
+            <!-- Radio Options Group -->
+            <VBox spacing="14" style="-fx-padding: 10 0 10 0;" VBox.vgrow="ALWAYS">
+               <RadioButton fx:id="optionARadio" text="Option A" maxWidth="Infinity" styleClass="quiz-option">
+                  <toggleGroup>
+                     <ToggleGroup fx:id="optionsGroup"/>
+                  </toggleGroup>
+               </RadioButton>
+               <RadioButton fx:id="optionBRadio" text="Option B" toggleGroup="$optionsGroup" maxWidth="Infinity" styleClass="quiz-option"/>
+               <RadioButton fx:id="optionCRadio" text="Option C" toggleGroup="$optionsGroup" maxWidth="Infinity" styleClass="quiz-option"/>
+               <RadioButton fx:id="optionDRadio" text="Option D" toggleGroup="$optionsGroup" maxWidth="Infinity" styleClass="quiz-option"/>
+            </VBox>
+
+            <Separator/>
+
+            <!-- Action Navigation Buttons -->
+            <HBox spacing="14" alignment="CENTER_RIGHT">
+               <Button fx:id="prevBtn" onAction="#previousQuestion" text="← Previous" styleClass="btn-outline"/>
+               <Region HBox.hgrow="ALWAYS"/>
+               <Button fx:id="nextBtn" onAction="#nextQuestion" text="Next Question →" styleClass="btn-primary"/>
+               <Button fx:id="submitBtn" onAction="#confirmFinishQuiz" text="Submit Test ✓" styleClass="btn-success"/>
+            </HBox>
+
+         </VBox>
+
+      </VBox>
+   </center>
+</BorderPane>
